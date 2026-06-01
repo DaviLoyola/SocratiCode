@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SocratiCode</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/neo.min.css" />
+  <link rel="stylesheet" href="/frontend/style.css" />
+</head>
+<body>
+  <div class="page-background"></div>
+  <header class="app-header">
+    <div class="logo">SC</div>
+    <div>
+      <h1>SocratiCode</h1>
+      <p>Tutor socrático para depuração com autonomia.</p>
+    </div>
+  </header>
+
+  <main class="app-layout">
+    <section class="left-panel">
+      <h2>Seu código</h2>
+      <div id="code-editor"></div>
+      <div class="editor-actions">
+        <button id="clear-code" type="button" class="ghost-btn">Limpar código</button>
+        <span id="language-hint">Linguagem detectada: texto</span>
+      </div>
+
+      <label for="question" class="question-label">Sua dúvida</label>
+      <textarea id="question" placeholder="Descreva sua dúvida ou o que está acontecendo..." maxlength="2000"></textarea>
+      <div class="question-meta">
+        <span id="question-count">0/500</span>
+      </div>
+
+      <button id="analyze-btn" class="primary-btn" type="button">Enviar para o Tutor</button>
+    </section>
+
+    <section class="right-panel">
+      <div class="chat-header">
+        <h2>Chat educativo</h2>
+        <button id="new-conversation" type="button" class="ghost-btn">Nova conversa</button>
+      </div>
+      <div id="chat-container" class="chat-container"></div>
+    </section>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/python/python.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/javascript/javascript.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/clike/clike.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.5/dist/purify.min.js"></script>
+  <script src="/frontend/app.js"></script>
+</body>
+</html>
