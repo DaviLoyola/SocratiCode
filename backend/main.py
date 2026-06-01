@@ -119,6 +119,9 @@ def analyze() -> Any:
     if not isinstance(code, str) or not isinstance(question, str):
         return jsonify({"error": "Payload invalido. Informe texto em code e question."}), 400
 
+    if not code and not question:
+        return jsonify({"error": "Envie codigo ou duvida."}), 400
+
     session_id, session_payload, _ = ensure_session()
     history = session_payload.get("messages", [])
 

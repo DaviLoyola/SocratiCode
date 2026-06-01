@@ -141,13 +141,13 @@ def sanitize_text(value: str) -> str:
 
 def validate_payload(code: str, question: str) -> None:
     """Validate required inputs and enforce anti-abuse size limits."""
-    if not code or not question:
-        raise ValueError("Both code and question are required.")
+    if not code and not question:
+        raise ValueError("Codigo ou duvida sao obrigatorios.")
 
-    if len(code) > config.MAX_CODE_CHARS:
+    if code and len(code) > config.MAX_CODE_CHARS:
         raise ValueError(f"Code must be at most {config.MAX_CODE_CHARS} characters.")
 
-    if len(question) > config.MAX_QUESTION_CHARS:
+    if question and len(question) > config.MAX_QUESTION_CHARS:
         raise ValueError(f"Question must be at most {config.MAX_QUESTION_CHARS} characters.")
 
 

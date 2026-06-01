@@ -112,3 +112,31 @@ def test_api_unavailable_exception() -> None:
     assert result["response"] == config.USER_FACING_API_ERROR_MESSAGE
     assert result["used_fallback"] is True
     assert result["metadata"]["error_type"] == "upstream_unavailable"
+
+
+def test_pipeline_accepts_question_only() -> None:
+    """The pipeline should accept a question without code."""
+    pipeline, diagnostic_agent, socratic_agent, supervisor_agent = build_pipeline()
+    diagnostic_agent.analyze.return_value = valid_diagnostic()
+    socratic_agent.generate_response.return_value = "Vamos refletir sem codigo especifico."
+    supervisor_agent.review.return_value = {"aprovado": True, "motivo": None, "instrucao_correcao": None}
+
+    result = pipeline.run_turn("session-f", "", "Me ajuda com esse erro", [])
+
+    assert result["response"] == "Vamos refletir sem codigo especifico."
+    assert result["approved"] is True
+    assert result["used_fallback"] is False
+
+
+def test_pipeline_accepts_code_only() -> None:
+    """The pipeline should accept code without a separate question."""
+    pipeline, diagnostic_agent, socratic_agent, supervisor_agent = build_pipeline()
+    diagnostic_agent.analyze.return_value = valid_diagnostic()
+    socratic_agent.generate_response.return_value = "Vamos analisar seu codigo e pensar sobre o comportamento."
+    supervisor_agent.review.return_value = {"aprovado": True, "motivo": None, "instrucao_correcao": None}
+
+    result = pipeline.run_turn("session-g", "print('oi')", "", [])
+
+    assert result["response"] == "Vamos analisar seu codigo e pensar sobre o comportamento."
+    assert result["approved"] is True
+    assert result["used_fallback"] is False

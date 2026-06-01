@@ -126,8 +126,8 @@ async function sendToTutor() {
   const code = editor.getValue().trim();
   const question = questionTextarea.value.trim();
 
-  if (!code || !question) {
-    alert("Preencha o código e a dúvida antes de enviar.");
+  if (!code && !question) {
+    alert("Preencha o código ou a dúvida antes de enviar.");
     return;
   }
 
